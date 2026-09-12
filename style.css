@@ -1,0 +1,492 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Minecraft', 'Arial', sans-serif;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    color: #fff;
+    overflow: hidden;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@font-face {
+    font-family: 'Minecraft';
+    src: url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+}
+
+.screen {
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+}
+
+.screen.active {
+    display: flex;
+}
+
+/* START SCREEN */
+.minecraft-title {
+    text-align: center;
+    margin-bottom: 60px;
+    animation: bounce 2s infinite;
+}
+
+.minecraft-title h1 {
+    font-size: 72px;
+    color: #00ff00;
+    text-shadow: 3px 3px 0px #000, 6px 6px 0px rgba(0, 255, 0, 0.3);
+    font-weight: bold;
+    letter-spacing: 4px;
+    margin-bottom: 10px;
+}
+
+.minecraft-title .subtitle {
+    font-size: 24px;
+    color: #ffaa00;
+    text-shadow: 2px 2px 0px #000;
+    letter-spacing: 2px;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+.menu-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+
+.minecraft-btn {
+    padding: 15px 40px;
+    font-size: 20px;
+    font-weight: bold;
+    background: linear-gradient(to bottom, #90EE90, #228B22);
+    color: #000;
+    border: 3px solid #000;
+    cursor: pointer;
+    text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0 -4px 0px rgba(0, 0, 0, 0.3), 0 4px 0px rgba(0, 0, 0, 0.5);
+    transition: all 0.1s;
+    font-family: 'Arial', sans-serif;
+    letter-spacing: 2px;
+}
+
+.minecraft-btn:hover {
+    background: linear-gradient(to bottom, #98FB98, #32CD32);
+    transform: translate(0, -2px);
+    box-shadow: inset 0 -4px 0px rgba(0, 0, 0, 0.3), 0 6px 0px rgba(0, 0, 0, 0.5);
+}
+
+.minecraft-btn:active {
+    transform: translate(0, 2px);
+    box-shadow: inset 0 -2px 0px rgba(0, 0, 0, 0.3), 0 2px 0px rgba(0, 0, 0, 0.5);
+}
+
+.minecraft-btn.quit-btn {
+    background: linear-gradient(to bottom, #FF6B6B, #CC0000);
+    color: #fff;
+}
+
+.minecraft-btn.quit-btn:hover {
+    background: linear-gradient(to bottom, #FF8787, #FF0000);
+}
+
+.back-btn {
+    margin-top: 30px;
+    background: linear-gradient(to bottom, #FFD700, #FFA500) !important;
+    color: #000 !important;
+}
+
+/* EDITION SCREEN */
+.edition-container {
+    text-align: center;
+}
+
+.edition-container h2 {
+    font-size: 48px;
+    margin-bottom: 50px;
+    color: #00ff00;
+    text-shadow: 3px 3px 0px #000;
+}
+
+.edition-cards {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.edition-card {
+    width: 250px;
+    padding: 30px;
+    background: linear-gradient(135deg, #2a2a4e, #3a3a5e);
+    border: 4px solid #fff;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 8px 0px rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+}
+
+.edition-card:hover {
+    transform: scale(1.05) translateY(-10px);
+    box-shadow: 0 12px 0px rgba(0, 0, 0, 0.5);
+    border-color: #00ff00;
+}
+
+.edition-card.java {
+    border-color: #d4af37;
+}
+
+.edition-card.bedrock {
+    border-color: #00bfff;
+}
+
+.card-icon {
+    font-size: 60px;
+    margin-bottom: 15px;
+}
+
+.edition-card h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+}
+
+.edition-card p {
+    font-size: 14px;
+    color: #ddd;
+}
+
+/* GAME SCREEN */
+.game-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    border-bottom: 3px solid #228B22;
+}
+
+.edition-badge {
+    background: #228B22;
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.health-bar, .hunger-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: bold;
+}
+
+.health-fill, .hunger-fill {
+    width: 100px;
+    height: 15px;
+    background: #333;
+    border: 2px solid #fff;
+    border-radius: 3px;
+    position: relative;
+}
+
+.health-fill {
+    background: linear-gradient(to right, #ff4444, #ff8888);
+    width: 100px;
+}
+
+.hunger-fill {
+    background: linear-gradient(to right, #ffaa00, #ffdd00);
+    width: 100px;
+}
+
+.game-container {
+    display: flex;
+    margin-top: 80px;
+    gap: 10px;
+    padding: 10px;
+    height: calc(100vh - 200px);
+    width: 100%;
+}
+
+#gameCanvas {
+    background: linear-gradient(180deg, #87CEEB 0%, #E0F6FF 100%);
+    border: 4px solid #228B22;
+    flex: 1;
+    max-width: 800px;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}
+
+.sidebar {
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    overflow-y: auto;
+}
+
+.inventory-section, .ai-status {
+    background: rgba(0, 0, 0, 0.6);
+    border: 2px solid #228B22;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.inventory-section h3, .ai-status h3 {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #00ff00;
+    font-size: 14px;
+}
+
+.inventory-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 5px;
+}
+
+.inventory-slot {
+    width: 35px;
+    height: 35px;
+    background: #8b7355;
+    border: 2px solid #654321;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.inventory-slot:hover {
+    border-color: #00ff00;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+}
+
+.ai-info p {
+    font-size: 12px;
+    margin: 5px 0;
+    color: #aaa;
+}
+
+.controls {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 3px solid #228B22;
+    gap: 20px;
+}
+
+.movement-controls {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.movement-controls > div {
+    display: grid;
+    grid-template-columns: repeat(3, 50px);
+    gap: 5px;
+}
+
+.control-btn {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(to bottom, #90EE90, #228B22);
+    color: #000;
+    border: 2px solid #000;
+    font-weight: bold;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 3px;
+    transition: all 0.1s;
+}
+
+.control-btn:hover {
+    background: linear-gradient(to bottom, #98FB98, #32CD32);
+}
+
+.control-btn:active {
+    transform: scale(0.95);
+}
+
+#actionBtn {
+    width: 60px;
+    height: 50px;
+    background: linear-gradient(to bottom, #FFD700, #FFA500);
+    color: #000;
+}
+
+.game-controls {
+    display: flex;
+    gap: 10px;
+}
+
+.game-controls .minecraft-btn {
+    padding: 10px 20px;
+    font-size: 14px;
+}
+
+/* ADD-ONS SCREEN */
+.addons-container {
+    text-align: center;
+    width: 90%;
+    max-width: 800px;
+}
+
+.addons-container h2 {
+    font-size: 48px;
+    margin-bottom: 40px;
+    color: #00ff00;
+    text-shadow: 3px 3px 0px #000;
+}
+
+.addons-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.addon-card {
+    background: linear-gradient(135deg, #2a2a4e, #3a3a5e);
+    border: 3px solid #FFD700;
+    padding: 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.addon-card:hover {
+    transform: scale(1.05);
+    border-color: #00ff00;
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
+}
+
+.addon-card h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #FFD700;
+}
+
+.addon-card p {
+    font-size: 12px;
+    color: #ddd;
+    margin-bottom: 10px;
+}
+
+.addon-toggle {
+    background: #228B22;
+    color: #fff;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.addon-toggle.disabled {
+    background: #666;
+}
+
+/* SETTINGS SCREEN */
+.settings-container {
+    background: rgba(0, 0, 0, 0.6);
+    border: 3px solid #228B22;
+    padding: 40px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 500px;
+}
+
+.settings-container h2 {
+    font-size: 36px;
+    margin-bottom: 30px;
+    color: #00ff00;
+    text-shadow: 2px 2px 0px #000;
+    text-align: center;
+}
+
+.settings-option {
+    margin-bottom: 25px;
+    text-align: left;
+}
+
+.settings-option label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.settings-option input[type="range"] {
+    width: 100%;
+    cursor: pointer;
+}
+
+.settings-option select {
+    width: 100%;
+    padding: 10px;
+    background: #2a2a4e;
+    color: #fff;
+    border: 2px solid #228B22;
+    border-radius: 3px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.settings-option input[type="checkbox"] {
+    margin-right: 10px;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+::-webkit-scrollbar-thumb {
+    background: #228B22;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #00ff00;
+}
