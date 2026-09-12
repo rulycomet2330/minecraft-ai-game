@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minecraft AI Edition</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="startScreen" class="screen active">
+        <div class="minecraft-title">
+            <h1>MINECRAFT</h1>
+            <p class="subtitle">AI Edition</p>
+        </div>
+        <div class="menu-container">
+            <button class="minecraft-btn" onclick="showEditionSelect()">Play Game</button>
+            <button class="minecraft-btn" onclick="showAddOns()">Add-ons</button>
+            <button class="minecraft-btn" onclick="showSettings()">Settings</button>
+            <button class="minecraft-btn quit-btn" onclick="quitGame()">Quit</button>
+        </div>
+    </div>
+
+    <div id="editionScreen" class="screen">
+        <div class="edition-container">
+            <h2>Select Edition</h2>
+            <div class="edition-cards">
+                <div class="edition-card java" onclick="startGame('java')">
+                    <div class="card-icon">⬜</div>
+                    <h3>Java Edition</h3>
+                    <p>Classic Minecraft with mods and AI features</p>
+                </div>
+                <div class="edition-card bedrock" onclick="startGame('bedrock')">
+                    <div class="card-icon">💎</div>
+                    <h3>Bedrock Edition</h3>
+                    <p>Cross-platform Minecraft with AI companions</p>
+                </div>
+            </div>
+            <button class="minecraft-btn back-btn" onclick="backToMenu()">Back</button>
+        </div>
+    </div>
+
+    <div id="gameScreen" class="screen">
+        <div class="game-header">
+            <div class="edition-badge" id="editionBadge">Java Edition</div>
+            <div class="health-bar">
+                <div id="health" class="health-fill"></div>
+                <span id="healthText">10/10</span>
+            </div>
+            <div class="hunger-bar">
+                <div id="hunger" class="hunger-fill"></div>
+                <span id="hungerText">10/10</span>
+            </div>
+        </div>
+
+        <div class="game-container">
+            <canvas id="gameCanvas" width="800" height="600"></canvas>
+            <div class="sidebar">
+                <div class="inventory-section">
+                    <h3>Inventory</h3>
+                    <div id="inventory" class="inventory-grid"></div>
+                </div>
+                <div class="ai-status">
+                    <h3>AI Companion</h3>
+                    <div id="aiStatus" class="ai-info">
+                        <p id="aiName">Companion: Alex</p>
+                        <p id="aiAction">Status: Idle</p>
+                        <p id="aiHealth">Health: 10/10</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <div class="movement-controls">
+                <button class="control-btn" id="upBtn" onmousedown="movePlayer('up')" onmouseup="stopMove()">↑</button>
+                <div>
+                    <button class="control-btn" id="leftBtn" onmousedown="movePlayer('left')" onmouseup="stopMove()">←</button>
+                    <button class="control-btn" id="downBtn" onmousedown="movePlayer('down')" onmouseup="stopMove()">↓</button>
+                    <button class="control-btn" id="rightBtn" onmousedown="movePlayer('right')" onmouseup="stopMove()">→</button>
+                </div>
+                <button class="control-btn" id="actionBtn" onclick="playerAction()">ACTION</button>
+            </div>
+            <div class="game-controls">
+                <button class="minecraft-btn" onclick="savegame()">Save</button>
+                <button class="minecraft-btn" onclick="backToMenu()">Menu</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="addOnsScreen" class="screen">
+        <div class="addons-container">
+            <h2>Available Add-ons</h2>
+            <div class="addons-list" id="addonsList"></div>
+            <button class="minecraft-btn back-btn" onclick="backToMenu()">Back</button>
+        </div>
+    </div>
+
+    <div id="settingsScreen" class="screen">
+        <div class="settings-container">
+            <h2>Settings</h2>
+            <div class="settings-option">
+                <label>Master Volume:</label>
+                <input type="range" min="0" max="100" value="70" id="volumeControl">
+            </div>
+            <div class="settings-option">
+                <label>Difficulty:</label>
+                <select id="difficultySelect">
+                    <option value="peaceful">Peaceful</option>
+                    <option value="easy">Easy</option>
+                    <option value="normal" selected>Normal</option>
+                    <option value="hard">Hard</option>
+                </select>
+            </div>
+            <div class="settings-option">
+                <label>AI Difficulty:</label>
+                <select id="aiDifficultySelect">
+                    <option value="easy">Easy</option>
+                    <option value="normal" selected>Normal</option>
+                    <option value="hard">Hard</option>
+                </select>
+            </div>
+            <div class="settings-option">
+                <label>
+                    <input type="checkbox" id="aiCompanion" checked>
+                    Enable AI Companion
+                </label>
+            </div>
+            <button class="minecraft-btn back-btn" onclick="backToMenu()">Back</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
